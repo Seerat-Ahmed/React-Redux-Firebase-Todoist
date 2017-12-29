@@ -31,6 +31,7 @@ class TodoInput extends Component {
                     type="text"
                     name="task"
                     value={this.state.task}
+                    onClick={ this.onSubmit }
                     onChange={this.handleChange}
                     className="form-control" />
 
