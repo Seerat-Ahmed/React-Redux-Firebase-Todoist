@@ -1,0 +1,11 @@
+.btnn  {
+    display: inline-block;
+    margin: 0;
+    margin-right: 30px;
+    width: 30%;
+}
+
+.button-wrapper {
+    width: 80%;
+    text-align: right;
+}

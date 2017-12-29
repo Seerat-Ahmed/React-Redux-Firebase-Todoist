@@ -1,0 +1,16 @@
+input {
+    width: 80%;
+}
+
+.todo-text {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.input {
+    margin-top: 20px;
+    width: 70%;
+}
