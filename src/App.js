@@ -10,7 +10,6 @@ class App extends Component {
 		super(props);
 		this.state = {
 			todos: [],
-			id: 1
 		};
 		this.addTodo = this.addTodo.bind(this);
 		this.retrieveTodo = this.retrieveTodo.bind(this);
@@ -18,9 +17,8 @@ class App extends Component {
 		this.retrieveTodo();
 	}
 
-	addTodo(text, id) {
-		firebase.database().ref('/todos').push({
-			id: id,
+	addTodo(text) {
+		firebase.database().ref('/todos').push({	
 			todo: text
 		})
 			.then(() => { console.log('Successful') })
@@ -70,7 +68,7 @@ class App extends Component {
 
 	removeFromTodos(id, event) {
 		let todos = this.state.todos;
-		todos = todos.filter((todo) => todo.id !== Number(id));
+		todos.splice(id, 1);
 		this.setState({ todos: todos });
 	}
 
@@ -91,8 +89,8 @@ class App extends Component {
 				</div>
 				<ul>
 					{
-						this.state.todos.map((todo) => {
-							return (<TodoItem todo={todo.todo} pk={todo.key} id={todo.id} key={todo.id} remove={this.remove.bind(this)} />)
+						this.state.todos.map((todo, index) => {
+							return (<TodoItem todo={todo.todo} pk={todo.key} id={index} key={index} remove={this.remove.bind(this)} />)
 						})
 					}
 				</ul>

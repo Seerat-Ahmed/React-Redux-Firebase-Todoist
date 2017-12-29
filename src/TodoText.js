@@ -5,7 +5,7 @@ class TodoInput extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { task: '', id: 0 };
+        this.state = { task: '' };
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -16,11 +16,10 @@ class TodoInput extends Component {
 
     onSubmit(event) {
         let text = this.state.task;
-        let id = this.state.id;
         event.preventDefault();
         if (text.length > 0) {
-            this.props.addTodo(text, id);
-            this.setState({ id: id + 1, task: '' });
+            this.props.addTodo(text);
+            this.setState({ task: '' });
         }
     }
 
