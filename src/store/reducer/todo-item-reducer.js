@@ -11,8 +11,8 @@ export default (state = [], action) => {
         case constant.DELETE_TODO_ITEM:
             {
                 let id = action.payload.id;
-                let todos = state.splice(id, 1)
-                return [...todos];
+                state.splice(id, 1)
+                return [...state];
             }
         case constant.DELETE_ALL:
             {
