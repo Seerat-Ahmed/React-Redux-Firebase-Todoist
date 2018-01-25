@@ -18,6 +18,13 @@ export default (state = [], action) => {
             {
                 return [];
             }
+        case constant.EDIT_TODO:
+            {
+                let todo = action.payload.todo;
+                let id = action.payload.id;
+                state.splice(id, 1, todo);
+                return [...state];
+            }
         default:
             return state;
     }

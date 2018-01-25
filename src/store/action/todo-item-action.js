@@ -30,3 +30,12 @@ export function _deleteAll() {
 
     return action;
 }
+
+export function _update(todo, id) {
+    const action = {
+        type: constant.EDIT_TODO,
+        payload: { todo, id }
+    }
+
+    return action;
+}

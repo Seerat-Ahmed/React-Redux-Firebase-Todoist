@@ -2,4 +2,5 @@ export default {
     ADD_TODO_ITEM: 'ADD_TODO_ITEM',
     DELETE_TODO_ITEM: 'DELETE_TODO_ITEM',
     DELETE_ALL: 'DELETE_ALL',
+    EDIT_TODO: 'EDIT_TODO',
 };
