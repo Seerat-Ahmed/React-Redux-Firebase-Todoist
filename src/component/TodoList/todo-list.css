@@ -10,3 +10,7 @@
 .todo-list .action button {
     margin-left: 5px;
 }
+
+.hide {
+    display: none;
+}
