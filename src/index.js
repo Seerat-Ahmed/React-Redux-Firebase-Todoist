@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './component/App/App';
 import * as firebase from 'firebase';
+import 'bootstrap/dist/css/bootstrap.css';
+import store from '../src/store';
+import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -12,9 +15,14 @@ var config = {
     databaseURL: "https://fir-acc02.firebaseio.com",
     projectId: "fir-acc02",
     storageBucket: "fir-acc02.appspot.com",
-    messagingSenderId: "1012391573738"  
+    messagingSenderId: "1012391573738"
 };
+
 firebase.initializeApp(config);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+    , document.getElementById('root'));
 registerServiceWorker();

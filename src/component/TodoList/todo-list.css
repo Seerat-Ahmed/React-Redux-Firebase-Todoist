@@ -1,0 +1,12 @@
+.todo-list {
+    width: 80%;
+    margin: 10px auto;  
+}
+
+.todo-list .action {
+    float: right;
+}
+
+.todo-list .action button {
+    margin-left: 5px;
+}

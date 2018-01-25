@@ -1,0 +1,13 @@
+.todo-input {
+    width: 80%;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.todo-input h2 {
+    text-align: center;
+}
+
+.todo-input button {
+    margin-left: 8px;
+}
