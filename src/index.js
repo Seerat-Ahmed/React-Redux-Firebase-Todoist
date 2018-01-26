@@ -1,28 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './component/App/App';
 import * as firebase from 'firebase';
 import 'bootstrap/dist/css/bootstrap.css';
 import store from '../src/store';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
+import MyRoutes from './component/Routes/MyRoutes';
 
 
 var config = {
-    apiKey: "AIzaSyB1iHDWAnpj5bcQKP5VaEfQYWVICGE6k40",
-    authDomain: "fir-acc02.firebaseapp.com",
-    databaseURL: "https://fir-acc02.firebaseio.com",
-    projectId: "fir-acc02",
-    storageBucket: "fir-acc02.appspot.com",
-    messagingSenderId: "1012391573738"
+    apiKey: "AIzaSyBvlDVkLnOPNM3agrkwiWLWKgKoAbg_4do",
+    authDomain: "bookmarks-c6978.firebaseapp.com",
+    databaseURL: "https://bookmarks-c6978.firebaseio.com",
+    projectId: "bookmarks-c6978",
+    storageBucket: "bookmarks-c6978.appspot.com",
+    messagingSenderId: "961234129794"
 };
 
 firebase.initializeApp(config);
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <MyRoutes />
     </Provider>
     , document.getElementById('root'));
 registerServiceWorker();
