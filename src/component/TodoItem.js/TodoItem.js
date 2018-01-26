@@ -48,8 +48,10 @@ class TodoItem extends Component {
     }
 
     updateTodo(event) {
-        this.props.editTodo(this.state.todo, event.target.id);
+        if (this.state.todo !== '')
+            this.props.editTodo(this.state.todo, event.target.id);
         this.setState({ isEdit: !this.state.isEdit });
+        this.setState({ todo: '' });
     }
     render() {
         return (

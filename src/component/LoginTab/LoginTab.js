@@ -35,7 +35,7 @@ class LoginTab extends Component {
                 : (
                     <ul className="nav navbar-nav navbar-right">
                         <li className="nav-item">
-                            <Link className="nav-item" to="/signup">Register</Link>
+                            <Link className="nav-link" to="/signup">Register</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/signin">Sign In</Link>
