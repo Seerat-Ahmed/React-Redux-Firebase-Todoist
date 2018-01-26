@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './todo-list.css';
 import { connect } from 'react-redux';
-import { _update } from '../../store/action/todo-item-action';
 import TodoItem from '../TodoItem.js/TodoItem';
 
 class TodoList extends Component {

@@ -9,8 +9,10 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<TodoInput />
-				<TodoList />
+				<div>
+					<TodoInput />
+					<TodoList />
+				</div>
 			</div>
 		);
 	}
