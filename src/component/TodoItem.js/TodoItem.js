@@ -12,8 +12,7 @@ class TodoItem extends Component {
             todo: '',
         };
 
-        this.deleteTodo = this.deleteTodo.bind(this);
-        this.toggleEdit = this.toggleEdit.bind(this);
+            this.toggleEdit = this.toggleEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.cancel = this.cancel.bind(this);
         this.updateTodo = this.updateTodo.bind(this);
@@ -25,10 +24,6 @@ class TodoItem extends Component {
     cancel() {
         this.toggleEdit();
         this.setState({ todo: '' });
-    }
-
-    deleteTodo(event) {
-        this.props.deleteTodo(event.target.id);
     }
 
     toggleEdit(event) {
@@ -55,7 +50,6 @@ class TodoItem extends Component {
         if (this.state.todo !== '') {
             firebase.database().ref('/todos/' + this.props.user.uid + '/' + key).update({ todo: this.state.todo })
                 .then((success) => {
-                    console.log(todo, key,  "+++++++++++++++");
                     this.props.editByKey(todo, key);
                 });
         }
@@ -96,8 +90,6 @@ class TodoItem extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteTodo: (id) => dispatch(_deleteTodoItem(id)),
-        editTodo: (todo, id) => dispatch(_update(todo, id)),
         deleteTodoByKey: (key) => dispatch(_deleteTodoByKey(key)),
         editByKey: (todo, key) => dispatch(_editByKey(todo, key)),
     }

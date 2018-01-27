@@ -71,14 +71,12 @@ class TodoInput extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addTodo: (todo) => dispatch(_addTodoItem(todo)),
         deleteTodos: () => dispatch(_deleteAll()),
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        todo: state.todos,
         user: state.user,
     }
 }
