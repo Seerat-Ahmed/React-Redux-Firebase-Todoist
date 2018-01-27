@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './todo-input.css';
 import { connect } from 'react-redux';
 import { _addTodoItem, _deleteAll } from '../../store/action/todo-item-action';
+import { firebase } from '@firebase/app';
 
 
 class TodoInput extends Component {
@@ -26,7 +27,7 @@ class TodoInput extends Component {
     handleAddButton() {
         if (this.state.todo !== '') {
             const todo = this.state.todo;
-            this.props.addTodo(todo);
+            firebase.database().ref('/todos/' + this.props.user.uid).push({ todo: todo });
             this.textbox.value = '';
             this.textbox.focus();
             this.setState({ todo: '' });
@@ -34,7 +35,13 @@ class TodoInput extends Component {
     }
 
     handleDeleteButton() {
-        this.props.deleteTodos();
+        firebase.database().ref('/todos/' + this.props.user.uid).remove()
+            .then((success) => {
+                this.props.deleteTodos();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     handleChange(event) {
@@ -72,6 +79,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         todo: state.todos,
+        user: state.user,
     }
 }
 

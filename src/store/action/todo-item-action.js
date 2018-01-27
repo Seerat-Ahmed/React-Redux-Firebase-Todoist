@@ -39,3 +39,22 @@ export function _update(todo, id) {
 
     return action;
 }
+
+
+export function _getTodoList(todo, key) {
+    const action = {
+        type: constant.GET_TODO_LIST,
+        payload: { todo, key },
+    }
+
+    return action;
+}
+
+
+export function _deleteTodoByKey(key) {
+    const action = {
+        type: constant.DELETE_BY_KEY,
+        payload: { key },
+    }
+    return action;
+}
