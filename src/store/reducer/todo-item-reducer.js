@@ -8,6 +8,15 @@ export default (state = [], action) => {
                 let todos = [...state, action.payload.todo]
                 return todos;
             }
+        case constant.EDIT_BY_KEY: {
+            state.map((todo, index) => {
+                if (todo.key === action.payload.key) {
+                    state.splice(index, 1, { todo: action.payload.todo, key: action.payload.key });
+                    return [...state];
+                }
+            });
+            return [...state];
+        }
         case constant.DELETE_BY_KEY:
             {
                 state.map((todo, index) => {

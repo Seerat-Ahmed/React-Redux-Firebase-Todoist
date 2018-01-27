@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { _update, _deleteTodoItem, _deleteTodoByKey } from '../../store/action/todo-item-action';
+import { _update, _deleteTodoItem, _deleteTodoByKey, _editByKey } from '../../store/action/todo-item-action';
 import * as firebase from 'firebase';
 
 class TodoItem extends Component {
@@ -50,8 +50,16 @@ class TodoItem extends Component {
     }
 
     updateTodo(event) {
-        if (this.state.todo !== '')
-            this.props.editTodo(this.state.todo, event.target.id);
+        const key = event.target.id;
+        const todo = this.state.todo;
+        if (this.state.todo !== '') {
+            firebase.database().ref('/todos/' + this.props.user.uid + '/' + key).update({ todo: this.state.todo })
+                .then((success) => {
+                    console.log(todo, key,  "+++++++++++++++");
+                    this.props.editByKey(todo, key);
+                });
+        }
+
         this.setState({ isEdit: !this.state.isEdit });
         this.setState({ todo: '' });
     }
@@ -59,9 +67,9 @@ class TodoItem extends Component {
     deleteFromDatabase(event) {
         const key = event.target.id;
         firebase.database().ref('/todos/' + this.props.user.uid + '/' + key).remove()
-        .then((success) => {
-            this.props.deleteTodoByKey(key);
-        });
+            .then((success) => {
+                this.props.deleteTodoByKey(key);
+            });
     }
 
     render() {
@@ -76,9 +84,9 @@ class TodoItem extends Component {
                 </li>
                 :
                 <li key={this.props.index} className="list-group-item">
-                    <input type="text" id={this.props.index} value={this.state.todo} onKeyPress={this.saveOnPressEnter} onChange={this.handleChange} className="form-control" />
+                    <input type="text" id={this.props.id} value={this.state.todo} onKeyPress={this.saveOnPressEnter} onChange={this.handleChange} className="form-control" />
                     <span className="action">
-                        <button id={this.props.id} onClick={this.updateTodo} className="btn btn-success">Save</button>
+                        <button id={this.props.id} uid={this.props.id} onClick={this.updateTodo} className="btn btn-success">Save</button>
                         <button id={this.props.index} onClick={this.cancel} className="btn btn-danger">Cancel</button>
                     </span>
                 </li>
@@ -91,6 +99,7 @@ const mapDispatchToProps = (dispatch) => {
         deleteTodo: (id) => dispatch(_deleteTodoItem(id)),
         editTodo: (todo, id) => dispatch(_update(todo, id)),
         deleteTodoByKey: (key) => dispatch(_deleteTodoByKey(key)),
+        editByKey: (todo, key) => dispatch(_editByKey(todo, key)),
     }
 }
 

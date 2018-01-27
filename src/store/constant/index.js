@@ -7,4 +7,5 @@ export default {
     GET_USER_INFO: 'GET_USER_INFO',
     GET_TODO_LIST: 'GET_TODO_LIST',
     DELETE_BY_KEY: 'DELETE_BY_KEY',
+    EDIT_BY_KEY: 'EDIT_BY_KEY',
 };

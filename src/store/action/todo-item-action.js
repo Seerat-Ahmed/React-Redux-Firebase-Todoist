@@ -58,3 +58,13 @@ export function _deleteTodoByKey(key) {
     }
     return action;
 }
+
+
+export function _editByKey(todo, key) {
+    const action = {
+        type: constant.EDIT_BY_KEY,
+        payload: { todo, key },
+    }
+
+    return action;
+}
