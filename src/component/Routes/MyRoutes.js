@@ -15,7 +15,7 @@ import history from '../../history';
 import { _setLoginState } from '../../store/action/set-login-action';
 import { _getUserinfo } from '../../store/action/get-user-info';
 import Profile from '../Profile/Profile';
-import { _getTodoList } from '../../store/action/todo-item-action';
+import { _getTodoList, _editByKey, _deleteTodoByKey } from '../../store/action/todo-item-action';
 
 
 class MyRoutes extends Component {
@@ -24,22 +24,38 @@ class MyRoutes extends Component {
         super(props);
         
         this.getAllTodos = this.getAllTodos.bind(this);
+        this.setChildChangeListener = this.setChildChangeListener.bind(this);
+        this.setChildRemoveListener = this.setChildRemoveListener.bind(this);
     }
 
+    setChildChangeListener() {
+        firebase.database().ref('/todos/' + this.props.user.uid + '/').on('child_changed', (snapshot) => {
+            console.log('updated');
+            this.props.editByKey(snapshot.val().todo, snapshot.key);
+        });
+    }
+
+    setChildRemoveListener() {
+        firebase.database().ref('/todos/' + this.props.user.uid + '/').on('child_removed', (snapshot) => {
+            this.props.removeTodo(snapshot.key);
+        });
+    }
 
     getAllTodos() {
         firebase.database().ref('/todos/' + this.props.user.uid + '/').on('child_added', (snapshot) => {
-            console.log(snapshot.val(), snapshot.key);
             this.props.getTodoList(snapshot.val().todo, snapshot.key);
         });
     }
 
     componentWillMount() {
         firebase.auth().onAuthStateChanged((user) => {
+
             if (user) {
                 this.props.setLoginState(true);
                 this.props.getUserInfo(user.displayName, user.email, user.uid);
                 this.getAllTodos();
+                this.setChildChangeListener();
+                this.setChildRemoveListener();
                 history.push('/');
             }
             else {
@@ -81,6 +97,8 @@ const mapDispatchToProps = (dispatch) => {
         setLoginState: (flag) => dispatch(_setLoginState(flag)),
         getUserInfo: (name, email, uid) => dispatch(_getUserinfo(name, email, uid)),
         getTodoList: (todo, key) => dispatch(_getTodoList(todo, key)),
+        editByKey: (todo, key) => dispatch(_editByKey(todo, key)),
+        removeTodo: (key) => dispatch(_deleteTodoByKey(key))
     }
 }
 

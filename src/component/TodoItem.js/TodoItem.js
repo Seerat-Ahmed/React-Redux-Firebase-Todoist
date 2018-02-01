@@ -12,7 +12,7 @@ class TodoItem extends Component {
             todo: '',
         };
 
-            this.toggleEdit = this.toggleEdit.bind(this);
+        this.toggleEdit = this.toggleEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.cancel = this.cancel.bind(this);
         this.updateTodo = this.updateTodo.bind(this);
